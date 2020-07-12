@@ -97,27 +97,27 @@ public struct WKBLRule: Codable {
             case ignorePreviousRules = "ignore-previous-rules"
         }
 
-        public var action: ActionType
+        public var type: ActionType
         public var selector: String?
 
         public init(selectorToNotDisplay: String) {
-            self = Action(action: .cssDisplayNone, selector: selectorToNotDisplay)!
+            self = Action(type: .cssDisplayNone, selector: selectorToNotDisplay)!
         }
 
         public init(selectorsToNotDisplay: [String]) {
             self = Action(selectorToNotDisplay: selectorsToNotDisplay.joined(separator: ", "))
         }
 
-        public init?(action: ActionType, selector: String? = nil) {
-            if action == .cssDisplayNone, selector == nil {
+        public init?(type: ActionType, selector: String? = nil) {
+            if type == .cssDisplayNone, selector == nil {
                 return nil
             }
 
-            if selector != nil, action != .cssDisplayNone {
+            if selector != nil, type != .cssDisplayNone {
                 return nil
             }
 
-            self.action = action
+            self.type = type
             self.selector = selector
         }
     }
